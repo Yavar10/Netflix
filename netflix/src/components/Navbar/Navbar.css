@@ -1,0 +1,65 @@
+.nav{
+    width: 100%;
+    padding: 20px 3%;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    font-size: 14px;
+    color: aliceblue;
+    background-image: linear-gradient(180deg,rgba(0,0,0,0.7) 10%, transparent);
+    z-index: 1;
+}
+.navl{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.navl img{
+    width: 90px;
+}
+.navl ul{
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    cursor: pointer;
+}
+.navr{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navr .pfp{
+width: 35px;
+border-radius: 4px;
+}
+.navr .icons{
+width: 20px;
+cursor: pointer;
+}
+.nav_pf{
+display: flex;
+align-items: center;
+gap: 10px;
+cursor: pointer;
+position: relative;
+}
+.nav .drop{
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    width: max-content;
+    padding: 18px 22px;
+    background-color: rgb(49, 49, 49);
+    text-decoration: underline;
+    border-radius: 2px;
+    z-index: 1;
+    display: none;
+}
+.nav .drop p{
+    font-size: 13px;
+    cursor: pointer;
+}
+.nav_pf:hover .drop{
+    display: block;
+}
