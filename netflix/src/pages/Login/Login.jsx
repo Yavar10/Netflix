@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Login.css"
 import logo from '../../assets/assets/logo.png'
 const Login = () => {
+
+  const [pagestate,setpagestate]=useState("Sign Up");
   return (
     <div className='box'>
       <img src={logo} className='login-logo' alt="" />
@@ -10,11 +12,12 @@ const Login = () => {
         <form className='form'>
         <div className='signin'>
         <h1>
-          Sign In
+         {pagestate}
         </h1>
         </div>
-        
-        {/*   <input className='log-input' type="text" placeholder='Your name' /> */}
+        {
+          pagestate==="Sign Up"?<input className='log-input' type="text" placeholder='Your name' />:<p></p>
+        }
           
           
         
@@ -35,6 +38,31 @@ const Login = () => {
             </div>
             <p className='nh'>Need help?</p>
           </div>
+        
+
+          {
+            pagestate==="Sign In"
+            ?
+              <div className='state-change'>
+            <p>Create an Account</p>
+            <p className='state-changer' onClick={()=>{
+              setpagestate("Sign Up")
+            }}>Sign Up</p>
+            </div>
+            :
+              <div className='state-change'>
+              <p>Already have an Account?</p>
+            <p className='state-changer' onClick={()=>{
+              setpagestate("Sign In")
+            }}>Sign In</p>
+            </div>
+          
+          }
+           
+           
+         
+         
+      
         </form>
       </div>
       </div>
