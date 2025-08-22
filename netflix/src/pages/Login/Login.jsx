@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { auth } from "../../Firebase/firebaseconfig";
+import { useNavigate } from "react-router-dom";
+
+
 import { 
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword,
@@ -9,11 +13,13 @@ import "./Login.css";
 import logo from "../../assets/assets/logo.png";
 
 const Login = () => {
+  const navigate=useNavigate();
   const [pagestate, setpagestate] = useState("Sign Up");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState("");
+  const [response,setResponse]=useState("");
 
   // Handle Submit
   const handleSubmit = async (e) => {
@@ -23,18 +29,25 @@ const Login = () => {
     try {
       if (pagestate === "Sign Up") {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        // ✅ Save display name
         await updateProfile(userCredential.user, { displayName: name });
         console.log("User Registered!", userCredential.user);
+        toast.success("Sign Up successful")
+        setpagestate("Sign In")
       } else {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         console.log("User Signed In!", userCredential.user);
+        toast.success("Sign Up successful")
+        navigate("/")
       }
     } catch (err) {
       console.error(err.message);
       setError(err.message);
     }
-  };
+  }
+  
+  
+  
+  ;
 
   return (
     <div className="box">
