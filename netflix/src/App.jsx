@@ -11,8 +11,8 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path='/'element={<Home/>} />
-        <Route path='/login'element={<Login/>} />
+        <Route path='/'element={<Login/>} />
+        <Route path='/Home'element={<Home/>} />
         <Route path='/player'element={<Player/>} />
       </Routes>
       <ToastContainer position="top-center" autoClose={3000} />
