@@ -2,7 +2,7 @@ import React from 'react'
 import './Home.css'
 
 import Navbar from '../../components/Navbar/Navbar'
-import Hero from '../../../public/hero_banner.jpg'
+//import Hero from '../../../public/hero_banner.jpg'
 import Titlecards from '../../components/Titlecards/Titlecards'
 import Footer from '../../components/Footer/Footer'
 
@@ -14,7 +14,7 @@ const Home = () => {
     <div>
       <Navbar/>
       <div className='hero'>
-        <img className='banner' src={Hero} alt="" />
+        <img className='banner' src='hero_banner.jpg' alt="" />
         <div className="caption">
           <img className='title' src={HeroT} alt="" />
           <p>Discovering his ties to a secret ancient order, a young man living 
