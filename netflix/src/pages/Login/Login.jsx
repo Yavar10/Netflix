@@ -19,7 +19,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState("");
-  const [response,setResponse]=useState("");
+  //const [response,setResponse]=useState("");
 
   // Handle Submit
   const handleSubmit = async (e) => {
