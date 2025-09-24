@@ -2,6 +2,7 @@ import React from 'react'
 import './Navbar.css'
 import logo from '../../assets/assets/logo.png'
 import searchIcon from '../../assets/assets/search_icon.svg'
+import { motion } from 'framer-motion'
 import bellIcon from '../../assets/assets/bell_icon.svg'
 import pfImg from '../../assets/assets/profile_img.png'
 import caretIcon from '../../assets/assets/caret_icon.svg'
@@ -10,7 +11,7 @@ const Navbar = () => {
     
     <div className='nav'>
     <div className='navl'>
-        <img src={logo} alt="" />
+        <motion.img whileHover={{scale:1.1}} src={logo} alt="" />
     
     <ul>
         <li>Home</li>

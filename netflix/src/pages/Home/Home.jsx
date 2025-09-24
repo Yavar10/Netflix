@@ -5,6 +5,7 @@ import Navbar from '../../components/Navbar/Navbar'
 //import Hero from '../../../public/hero_banner.jpg'
 import Titlecards from '../../components/Titlecards/Titlecards'
 import Footer from '../../components/Footer/Footer'
+import { motion } from 'framer-motion'
 
 import HeroT from '../../assets/assets/hero_title.png'
 import playbtn from '../../assets/assets/play_icon.png'
@@ -21,8 +22,8 @@ const Home = () => {
             in modern Istanbul
             embarks on a quest to save the city from immortal enemy.</p>
             <div className="hero_btn">
-              <button className='btn'><img src={playbtn} alt="" />Play</button>
-              <button className='btn dark-btn'><img src={infobtn} alt="" />Info</button>
+              <motion.button whileTap={{y:-1,scale:0.99}} className='btn'><img src={playbtn} alt="" />Play</motion.button>
+              <motion.button whileTap={{y:-1,scale:0.99}} className='btn dark-btn'><img src={infobtn} alt="" />Info</motion.button>
         </div>
             <Titlecards/>
             </div>
