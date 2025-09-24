@@ -18,10 +18,10 @@ const Home = () => {
   const ref4 = useRef(null)
 
   // independent inView states
-  const inView1 = useInView(ref1, { once: false, margin: "-100px" })
-  const inView2 = useInView(ref2, { once: false, margin: "-100px" })
-  const inView3 = useInView(ref3, { once: false, margin: "-100px" })
-  const inView4 = useInView(ref4, { once: false, margin: "-100px" })
+  const inView1 = useInView(ref1, { once: true, margin: "-100px" })
+  const inView2 = useInView(ref2, { once: true, margin: "-100px" })
+  const inView3 = useInView(ref3, { once: true, margin: "-100px" })
+  const inView4 = useInView(ref4, { once: true, margin: "-100px" })
 
   return (
     <div>
