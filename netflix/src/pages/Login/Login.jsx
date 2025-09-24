@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion"
 import { auth } from "../../Firebase/firebaseconfig";
 import { useNavigate } from "react-router-dom";
 
@@ -66,9 +67,11 @@ const Login = () => {
 
   return (
     <div className="box">
-      <img src={logo} className="login-logo" alt="logo" />
+      <motion.img whileHover={{scale:1.1}} src={logo} className="login-logo" alt="logo" />
       <div className="content">
-        <div className="login-form">
+        <motion.div initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }} className="login-form">
           <form className="form" onSubmit={handleSubmit}>
             <div className="signin">
               <h1>{pagestate}</h1>
@@ -100,9 +103,9 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button className="signin-btn" type="submit">
+            <motion.button whileTap={{y:-1,scale:0.99}} className="signin-btn" type="submit">
               {pagestate === "Sign Up" ? "Sign Up" : "Sign In"}
-            </button>
+            </motion.button>
 
             {error && <p style={{ color: "red" }}>{error}</p>}
 
@@ -136,7 +139,7 @@ const Login = () => {
               </div>
             )}
           </form>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
