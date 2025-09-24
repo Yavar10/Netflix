@@ -3,51 +3,66 @@ import { toast } from "react-toastify";
 import { auth } from "../../Firebase/firebaseconfig";
 import { useNavigate } from "react-router-dom";
 
-
-import { 
-  createUserWithEmailAndPassword, 
+import {
+  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile
+  updateProfile,
+  sendEmailVerification,   // 👈 add this
 } from "firebase/auth";
 import "./Login.css";
 import logo from "../../assets/assets/logo.png";
 
 const Login = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [pagestate, setpagestate] = useState("Sign Up");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState("");
-  //const [response,setResponse]=useState("");
 
   // Handle Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
 
     try {
       if (pagestate === "Sign Up") {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
         await updateProfile(userCredential.user, { displayName: name });
+
+        // 👇 send verification email
+        await sendEmailVerification(userCredential.user);
+        toast.info("Verification email sent! Please check your inbox.");
+
         console.log("User Registered!", userCredential.user);
-        toast.success("Sign Up successful")
-        setpagestate("Sign In")
+        setpagestate("Sign In");
+
       } else {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        if (!userCredential.user.emailVerified) {
+          toast.error("Please verify your email before signing in!");
+          return; // Stop login if email not verified
+        }
+
         console.log("User Signed In!", userCredential.user);
-        toast.success("Sign Up successful")
-        navigate("/Home")
+        toast.success("Sign In successful");
+        navigate("/Home");
       }
     } catch (err) {
       console.error(err.message);
       setError(err.message);
+      toast.error(err.message);
     }
-  }
-  
-  
-  
-  ;
+  };
 
   return (
     <div className="box">
