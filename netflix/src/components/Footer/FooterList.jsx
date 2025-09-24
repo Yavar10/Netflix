@@ -18,7 +18,7 @@ const FooterList = () => {
   ];
 
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" }); // triggers when list is scrolled into view
+  const isInView = useInView(ref, { once: false, margin: "-100px" }); // triggers when list is scrolled into view
 
   return (
     <ul ref={ref}>
