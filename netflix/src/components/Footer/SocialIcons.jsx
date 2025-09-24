@@ -7,7 +7,7 @@ import yt from '../../assets/assets/youtube_icon.png'
 
 const SocialIcons = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <div className="ficons" ref={ref} style={{ display: "flex", gap: "1rem" }}>
