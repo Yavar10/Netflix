@@ -18,7 +18,7 @@ const FooterList = () => {
   ];
 
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, margin: "-100px" }); // triggers when list is scrolled into view
+  const isInView = useInView(ref, { once: false, margin: "-100px" }); 
 
   return (
     <ul ref={ref}>
@@ -26,11 +26,11 @@ const FooterList = () => {
         <motion.li
           key={item}
           initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}} // only animate when in viewport
+          animate={isInView ? { opacity: 1, y: 0 } : {}} 
           transition={{
             duration: 0.5,
             ease: "easeOut",
-            delay: i * 0.1, // staggered delays
+            delay: i * 0.1, 
           }}
         >
           {item}
