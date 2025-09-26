@@ -5,17 +5,22 @@ import searchIcon from '../../assets/assets/search_icon.svg'
 import { motion } from 'framer-motion'
 import bellIcon from '../../assets/assets/bell_icon.svg'
 import pfImg from '../../assets/assets/profile_img.png'
+import { useNavigate } from 'react-router-dom'
 import caretIcon from '../../assets/assets/caret_icon.svg'
 const Navbar = () => {
+  const navigate = useNavigate();
+  const navlinks=(e)=>{
+      navigate(`/${e}`);
+  }
   return (
     
     <div className='nav'>
     <div className='navl'>
-        <motion.img whileHover={{scale:1.1}} src={logo} alt="" />
+        <motion.img  onClick={()=>{navlinks("Home")}} whileHover={{scale:1.1}} src={logo} alt="" />
     
     <ul>
-        <li>Home</li>
-        <li>TV Shows</li>
+        <li onClick={()=>{navlinks("Home")}}>Home</li>
+        <li onClick={()=>{navlinks("player")}}>TV Shows</li>
         <li>Movies</li>
         <li>New & Popular</li>
         <li>My List</li>
