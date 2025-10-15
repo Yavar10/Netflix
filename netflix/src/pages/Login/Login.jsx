@@ -105,7 +105,16 @@ const Login = () => {
 
             <motion.button whileTap={{y:-1,scale:0.99}} className="signin-btn" type="submit">
               {pagestate === "Sign Up" ? "Sign Up" : "Sign In"}
-            </motion.button>
+            </motion.button> {/* <motion.button  whileHover={{
+    backgroundColor: [ "#000000", "#ff0000ff","#ffffff",], // 👈 use hex/rgb values
+    color: ["#ffffff", "#ffffff", "#000000"],
+  }}
+  transition={{
+    duration: 0.8,
+    ease: "easeInOut",
+     repeat: Infinity,
+    repeatType: "loop"
+  }} whileTap={{y:-1,scale:0.99}} className="signin-btn" type="submit"> */}
 
             {error && <p style={{ color: "red" }}>{error}</p>}
 
