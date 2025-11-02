@@ -1,14 +1,20 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { motion } from "framer-motion"
 import { auth } from "../../Firebase/firebaseconfig";
-import { 
-  createUserWithEmailAndPassword, 
+import { useNavigate } from "react-router-dom";
+
+import {
+  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile
+  updateProfile,
+  sendEmailVerification,   // 👈 add this
 } from "firebase/auth";
 import "./Login.css";
 import logo from "../../assets/assets/logo.png";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [pagestate, setpagestate] = useState("Sign Up");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,29 +24,54 @@ const Login = () => {
   // Handle Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
 
     try {
       if (pagestate === "Sign Up") {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        // ✅ Save display name
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
         await updateProfile(userCredential.user, { displayName: name });
+
+        // 👇 send verification email
+        await sendEmailVerification(userCredential.user);
+        toast.info("Verification email sent! Please check your inbox.");
+
         console.log("User Registered!", userCredential.user);
+        setpagestate("Sign In");
+
       } else {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        if (!userCredential.user.emailVerified) {
+          toast.error("Please verify your email before signing in!");
+          return; // Stop login if email not verified
+        }
+
         console.log("User Signed In!", userCredential.user);
+        toast.success("Sign In successful");
+        navigate("/Home");
       }
     } catch (err) {
       console.error(err.message);
       setError(err.message);
+      toast.error(err.message);
     }
   };
 
   return (
     <div className="box">
-      <img src={logo} className="login-logo" alt="logo" />
+      <motion.img whileHover={{scale:1.1}} src={logo} className="login-logo" alt="logo" />
       <div className="content">
-        <div className="login-form">
+        <motion.div initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }} className="login-form">
           <form className="form" onSubmit={handleSubmit}>
             <div className="signin">
               <h1>{pagestate}</h1>
@@ -72,9 +103,18 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button className="signin-btn" type="submit">
+            <motion.button whileTap={{y:-1,scale:0.99}} className="signin-btn" type="submit">
               {pagestate === "Sign Up" ? "Sign Up" : "Sign In"}
-            </button>
+            </motion.button> {/* <motion.button  whileHover={{
+    backgroundColor: [ "#000000", "#ff0000ff","#ffffff",], // 👈 use hex/rgb values
+    color: ["#ffffff", "#ffffff", "#000000"],
+  }}
+  transition={{
+    duration: 0.8,
+    ease: "easeInOut",
+     repeat: Infinity,
+    repeatType: "loop"
+  }} whileTap={{y:-1,scale:0.99}} className="signin-btn" type="submit"> */}
 
             {error && <p style={{ color: "red" }}>{error}</p>}
 
@@ -108,7 +148,7 @@ const Login = () => {
               </div>
             )}
           </form>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
