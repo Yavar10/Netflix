@@ -16,7 +16,7 @@ const Navbar = () => {
     
     <div className='nav'>
     <div className='navl'>
-        <motion.img  onClick={()=>{navlinks("Home")}} whileHover={{scale:1.1}} src={logo} alt="" />
+        <motion.img  onClick={()=>{navlinks("Home")}} whileHover={{scale:1.1}} whileTap={{ro}} src={logo} alt="" />
     
     <ul>
         <li onClick={()=>{navlinks("Home")}}>Home</li>
